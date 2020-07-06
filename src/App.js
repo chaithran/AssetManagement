@@ -8,8 +8,9 @@ import React, { Component } from 'react';
 import './App.css';
 import TreeStructure from './TreeStructure'
 import FolderStructure from './FolderStructure'
-import { Grommet, Box, Tabs, Tab } from 'grommet'
+import { Grommet, Box, Tabs, Tab, Image } from 'grommet'
 import { DocumentImage, Overview } from 'grommet-icons'
+import main_image from './img/main.jpg';
 
 class App extends Component {
   constructor(props) {
@@ -22,12 +23,13 @@ class App extends Component {
   render() {
     return (
       // <Grommet full theme={theme}>
-        <Box pad="small" height="100vh" position="fixed" overflow="auto" align="center" flex="grow" animation={{ "type": "slideUp", "size": "small" }} background="#223E4F">
+        <Box background="url('./img/main.jpg')"
+         pad="small" height="100vh" position="fixed" overflow="auto" align="center" flex="grow" animation={{ "type": "slideUp", "size": "small" }} background="#223E4F">
            <Tabs justify="left" flex="shrink">
             <Tab title="Folder stucture" hoverIndicator={true} icon={<DocumentImage />} plain={false} reverse={false} >
             <FolderStructure />
             </Tab>            
-            <Tab title="Overview" hoverIndicator={true} icon={<Overview />}>
+            <Tab title="Overview" icon={<Overview /> } style={{ width:"9vw", border: "2px solid #223E4F", "border-radius": "10px" }}>
               <TreeStructure />
               </Tab>
           </Tabs>        

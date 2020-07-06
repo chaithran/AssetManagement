@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Resizer from 'react-image-file-resizer';
+import { Box, Button } from 'grommet';
 // import RNFetchBlob from 'rn-fetch-blob';
 
 class AddAsset extends Component {
@@ -37,10 +38,9 @@ class AddAsset extends Component {
                 'blob'//outputType  blob or base 64
             );
         }
-        else
-        {
+        else {
             this.setState({
-                image:files
+                image: files
             })
         }
         const imageFile = event.target.files[0];
@@ -85,21 +85,23 @@ class AddAsset extends Component {
         return (
             <div className="widget-container">
                 <form onSubmit={this.handleSubmit}>
-                    <p>
-                        <input type="text" placeholder='Title' id='title' value={this.state.title} onChange={this.handleChange} required />
-                    </p>
-                    <p>
-                        <input type="text" placeholder='Content' id='content' value={this.state.content} onChange={this.handleChange} required />
+                    <Box pad="small" gap="small">
+                        <Box>
+                            <input type="text" placeholder='Title' id='title' value={this.state.title} onChange={this.handleChange} required />
+                        </Box>
+                        <Box>
+                            <input type="text" placeholder='Content' id='content' value={this.state.content} onChange={this.handleChange} required />
 
-                    </p>
-                    <p>
-                        <input type="file"
-                            id="image"
-                            accept="image/png, image/jpeg, video/mp4" onChange={this.handleImageChange} required />
-                    </p>
-                    <input type="submit" />
+                        </Box>
+                        <Box>
+                            <input type="file"
+                                id="image"
+                                accept="image/png, image/jpeg, video/mp4" onChange={this.handleImageChange} required />
+                        </Box>
+                        <input type="submit" />
+                    </Box>
                 </form>
-            </div>
+            </div >
         );
     }
 }

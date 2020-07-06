@@ -31,8 +31,11 @@ class TreeStructure extends React.Component {
     return (
       <React.Fragment>
         <Box
-            background="brown"
-            width="90vw"
+            background="orange"
+            width="98vw"
+            height="85vh"
+            pad="medium"
+            round="small"
             >
         <div className="form">
           <TreeView id="treeview"
@@ -50,8 +53,7 @@ class TreeStructure extends React.Component {
           {
             !currentItem.isDirectory &&
             <div id="product-details">
-              <Box>       
-                
+              <Box>
                  {/* <img src={currentItem.image} /> */}
                 <div className="name">{currentItem.title}</div>
                 <img src={image_tmp}/>
