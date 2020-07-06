@@ -4,7 +4,7 @@ import { Popup } from 'devextreme-react/popup';
 import { Button, TextBox, Box } from 'devextreme-react';
 import AddAsset from './AddAsset';
 const allowedFileExtensions = []; //['.js', '.json', '.css'];
-
+ 
 // import { addAsset, addVariant, editContact, getFolderStructure } from "./FetchAPIs";
 
 class FolderStructure extends React.Component {
@@ -171,6 +171,7 @@ class FolderStructure extends React.Component {
     }
     //Reload tree structure
     get fileManager() {
+        if(this.fileManagerRef.current!=null)
         return this.fileManagerRef.current.instance;
     }
 
@@ -191,7 +192,7 @@ class FolderStructure extends React.Component {
             size: 0
         };
         this.addVariantAPI(newItem);
-        this.GetFolderStructure();
+        // this.GetFolderStructure();
 
     }
 

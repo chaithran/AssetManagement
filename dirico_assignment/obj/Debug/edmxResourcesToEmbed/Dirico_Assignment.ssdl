@@ -10,6 +10,9 @@
     <Property Name="FileObjectId" Type="int" Nullable="false" />
     <Property Name="BlobName" Type="nvarchar" MaxLength="100" />
     <Property Name="BlobPath" Type="nvarchar" MaxLength="100" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" />
+    <Property Name="Content" Type="nvarchar" MaxLength="200" />
+    <Property Name="Size" Type="bigint" />
   </EntityType>
   <EntityType Name="AssetTypes">
     <Key>

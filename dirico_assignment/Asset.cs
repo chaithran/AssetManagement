@@ -26,6 +26,9 @@ namespace dirico_assignment
         public int FileObjectId { get; set; }
         public string BlobName { get; set; }
         public string BlobPath { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public Nullable<long> Size { get; set; }
     
         public virtual AssetType AssetType { get; set; }
         public virtual FolderStructure FolderStructure { get; set; }

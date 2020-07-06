@@ -7,10 +7,7 @@ import 'devextreme/dist/css/dx.light.css';
 import React, { Component } from 'react';
 import './App.css';
 import TreeStructure from './TreeStructure'
-// import FileManagerComp from './FileManagerComp'
-// import AddAssetToBlob from './AddAssetToBlob'
 import FolderStructure from './FolderStructure'
-// import ReadBlob from './ReadBlob'
 import { Grommet, Box, Tabs, Tab } from 'grommet'
 import { DocumentImage, Overview } from 'grommet-icons'
 

@@ -18,6 +18,7 @@ namespace dirico_assignment.Common
                 "image/jpg",
                  "image/gif", //GIF
                 "video/x-msvideo", //Video
+                "video/mp4",
                 "video/quicktime" };
 
             public CustomStreamProvider(CloudBlobContainer blobContainer) : base("azure")

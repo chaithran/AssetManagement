@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Dirico_DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Dirico_DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Assets">
           <Key>
             <PropertyRef Name="ID" />
@@ -15,6 +15,9 @@
           <Property Name="FileObjectId" Type="int" Nullable="false" />
           <Property Name="BlobName" Type="nvarchar" MaxLength="100" />
           <Property Name="BlobPath" Type="nvarchar" MaxLength="100" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="Content" Type="nvarchar" MaxLength="200" />
+          <Property Name="Size" Type="bigint" />
         </EntityType>
         <EntityType Name="AssetTypes">
           <Key>
@@ -128,8 +131,7 @@
             <End Role="Variants" EntitySet="Variants" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Dirico_DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -146,6 +148,9 @@
           <NavigationProperty Name="AssetType" Relationship="Self.FK__Assets__AssetTyp__4F7CD00D" FromRole="Assets" ToRole="AssetTypes" />
           <NavigationProperty Name="FolderStructure" Relationship="Self.FK__Assets__FileObje__5070F446" FromRole="Assets" ToRole="FolderStructure" />
           <NavigationProperty Name="Variants" Relationship="Self.FK__Variants__AssetI__5441852A" FromRole="Assets" ToRole="Variants" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Int64" />
         </EntityType>
         <EntityType Name="AssetType">
           <Key>
@@ -275,6 +280,9 @@
           <EntitySetMapping Name="Assets">
             <EntityTypeMapping TypeName="Dirico_DatabaseModel.Asset">
               <MappingFragment StoreEntitySet="Assets">
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="AssetTypeId" ColumnName="AssetTypeId" />

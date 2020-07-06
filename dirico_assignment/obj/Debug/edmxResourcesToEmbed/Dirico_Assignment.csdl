@@ -13,6 +13,9 @@
     <NavigationProperty Name="AssetType" Relationship="Self.FK__Assets__AssetTyp__4F7CD00D" FromRole="Assets" ToRole="AssetTypes" />
     <NavigationProperty Name="FolderStructure" Relationship="Self.FK__Assets__FileObje__5070F446" FromRole="Assets" ToRole="FolderStructure" />
     <NavigationProperty Name="Variants" Relationship="Self.FK__Variants__AssetI__5441852A" FromRole="Assets" ToRole="Variants" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="Int64" />
   </EntityType>
   <EntityType Name="AssetType">
     <Key>
