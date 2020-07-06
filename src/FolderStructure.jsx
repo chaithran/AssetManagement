@@ -67,8 +67,10 @@ class FolderStructure extends React.Component {
         return (
             <React.Fragment>
                 <FileManager
+                    background="darkcyan"
                     ref={this.fileManagerRef}
-                    fileSystemProvider={this.state.fileItems}
+                    // fileSystemProvider={this.state.fileItems}
+                    fileSystemProvider={fileItems}
                     onContextMenuItemClick={this.onItemClick}
                     height={450}>
                     <Permissions

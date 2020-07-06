@@ -3,6 +3,8 @@ import renderHTML from 'react-render-html';
 import { TreeView, ContextMenu, List } from 'devextreme-react';
 import { Box, Button } from 'grommet';
 import ReactDOM from 'react-dom';
+import image_tmp from './img/b7.jpg';
+
 
 class TreeStructure extends React.Component {
   constructor(props) {
@@ -29,14 +31,17 @@ class TreeStructure extends React.Component {
     const { currentItem } = this.state;
     return (
       <React.Fragment>
+        <Box
+            background="brown"
+            width="90vw"
+            >
         <div className="form">
           <TreeView id="treeview"
-            items={this.state.overviewTree}
+            items={fileItems}
             // dataStructure="plain"
             displayExpr="name"
             parentIdExpr="parentID"
             keyExpr="id"
-            width={300}
             searchMode={this.state.value}
             searchEnabled={true}
             ref={this.treeViewRef}
@@ -48,7 +53,8 @@ class TreeStructure extends React.Component {
             <div id="product-details">
               <Box>       
                 
-                <div id="container"></div>  {/* <img src={currentItem.image} /> */}
+                <div id="container" ></div>  
+                <img src={image_tmp} />
                 <div className="name">{currentItem.name}</div>
                 <div className="price">{`$${currentItem.isDirectory}`}</div>
                 <input id="newVariant" />
@@ -57,6 +63,7 @@ class TreeStructure extends React.Component {
             </div>
           }
         </div>
+        </Box>
       </React.Fragment>
     );
   }
@@ -107,5 +114,22 @@ class TreeStructure extends React.Component {
 }
 var thisIsMyCopy = renderHTML('<p>copy copy copy <strong>strong copy</strong></p>');
 
+const fileItems = [
+  {
+      "id": 1,
+      "name": "Clients",
+      "parentId": null,
+      "isDirectory": true,
+      "items": [
+          {
+              "id": 2,
+              "name": "Variants",
+              "parentId": 1,
+              "isDirectory": true,
+
+          }
+      ]
+  }
+];
 
 export default TreeStructure;

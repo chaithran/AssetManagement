@@ -7,10 +7,10 @@ import 'devextreme/dist/css/dx.light.css';
 import React, { Component } from 'react';
 import './App.css';
 import TreeStructure from './TreeStructure'
-import FileManagerComp from './FileManagerComp'
-import AddAssetToBlob from './AddAssetToBlob'
+// import FileManagerComp from './FileManagerComp'
+// import AddAssetToBlob from './AddAssetToBlob'
 import FolderStructure from './FolderStructure'
-import ReadBlob from './ReadBlob'
+// import ReadBlob from './ReadBlob'
 import { Grommet, Box, Tabs, Tab } from 'grommet'
 import { DocumentImage, Overview } from 'grommet-icons'
 
@@ -24,8 +24,8 @@ class App extends Component {
   }
   render() {
     return (
-      <Grommet full theme={theme}>
-        <Box fill="horizontal" position="fixed" overflow="auto" align="center" flex="grow" animation={{ "type": "slideUp", "size": "small" }} background={{ "color": "lightblue" }} border={{ "size": "xlarge" }}>
+      // <Grommet full theme={theme}>
+        <Box pad="small" height="100vh" position="fixed" overflow="auto" align="center" flex="grow" animation={{ "type": "slideUp", "size": "small" }} background="#223E4F">
            <Tabs justify="left" flex="shrink">
             <Tab title="Folder stucture" hoverIndicator={true} icon={<DocumentImage />} plain={false} reverse={false} >
             <FolderStructure />
@@ -35,7 +35,7 @@ class App extends Component {
               </Tab>
           </Tabs>        
         </Box>
-      </Grommet>
+      // </Grommet>
     )
   }
 }
