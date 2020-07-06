@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Dirico_DatabaseModelStoreContainer" CdmEntityContainer="Dirico_DatabaseEntities">
+    <EntitySetMapping Name="Assets">
+      <EntityTypeMapping TypeName="Dirico_DatabaseModel.Asset">
+        <MappingFragment StoreEntitySet="Assets">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="AssetTypeId" ColumnName="AssetTypeId" />
+          <ScalarProperty Name="FileObjectId" ColumnName="FileObjectId" />
+          <ScalarProperty Name="BlobName" ColumnName="BlobName" />
+          <ScalarProperty Name="BlobPath" ColumnName="BlobPath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetTypes">
+      <EntityTypeMapping TypeName="Dirico_DatabaseModel.AssetType">
+        <MappingFragment StoreEntitySet="AssetTypes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FolderStructures">
+      <EntityTypeMapping TypeName="Dirico_DatabaseModel.FolderStructure">
+        <MappingFragment StoreEntitySet="FolderStructure">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="IsDirectory" ColumnName="IsDirectory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Variants">
+      <EntityTypeMapping TypeName="Dirico_DatabaseModel.Variant">
+        <MappingFragment StoreEntitySet="Variants">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FileObjectId" ColumnName="FileObjectId" />
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="AssetMetaData" ColumnName="AssetMetaData" />
+          <ScalarProperty Name="Properties" ColumnName="Properties" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

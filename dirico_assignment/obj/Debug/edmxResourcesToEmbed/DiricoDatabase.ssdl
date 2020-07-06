@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Dirico_AssignmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Assets">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="None" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="AssetTypeId" Type="int" Nullable="false" />
+    <Property Name="FileObjectId" Type="int" Nullable="false" />
+    <Property Name="BlobName" Type="nvarchar" MaxLength="100" />
+    <Property Name="BlobPath" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="AssetTypes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Value" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FolderStructure">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ParentID" Type="int" StoreGeneratedPattern="None" />
+    <Property Name="IsDirectory" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Variants">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="None" Nullable="false" />
+    <Property Name="FileObjectId" Type="int" Nullable="false" />
+    <Property Name="AssetID" Type="int" />
+    <Property Name="AssetMetaData" Type="nvarchar" MaxLength="200" />
+    <Property Name="Properties" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Dirico_Database.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Assets__AssetTyp__4F7CD00D">
+    <End Role="AssetTypes" Type="Self.AssetTypes" Multiplicity="1" />
+    <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetTypes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Assets">
+        <PropertyRef Name="AssetTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Assets__FileObje__5070F446">
+    <End Role="FolderStructure" Type="Self.FolderStructure" Multiplicity="1" />
+    <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FolderStructure">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Assets">
+        <PropertyRef Name="FileObjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FolderStr__Paren__4AB81AF0">
+    <End Role="FolderStructure" Type="Self.FolderStructure" Multiplicity="0..1" />
+    <End Role="FolderStructure1" Type="Self.FolderStructure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FolderStructure">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FolderStructure1">
+        <PropertyRef Name="ParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Variants__AssetI__5441852A">
+    <End Role="Assets" Type="Self.Assets" Multiplicity="0..1" />
+    <End Role="Variants" Type="Self.Variants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Assets">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Variants">
+        <PropertyRef Name="AssetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Variants__FileOb__534D60F1">
+    <End Role="FolderStructure" Type="Self.FolderStructure" Multiplicity="1" />
+    <End Role="Variants" Type="Self.Variants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FolderStructure">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Variants">
+        <PropertyRef Name="FileObjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Dirico_AssignmentModelStoreContainer">
+    <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssetTypes" EntityType="Self.AssetTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FolderStructure" EntityType="Self.FolderStructure" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Variants" EntityType="Self.Variants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+      <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Assets__AssetTyp__4F7CD00D" Association="Self.FK__Assets__AssetTyp__4F7CD00D">
+      <End Role="AssetTypes" EntitySet="AssetTypes" />
+      <End Role="Assets" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Assets__FileObje__5070F446" Association="Self.FK__Assets__FileObje__5070F446">
+      <End Role="FolderStructure" EntitySet="FolderStructure" />
+      <End Role="Assets" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FolderStr__Paren__4AB81AF0" Association="Self.FK__FolderStr__Paren__4AB81AF0">
+      <End Role="FolderStructure" EntitySet="FolderStructure" />
+      <End Role="FolderStructure1" EntitySet="FolderStructure" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Variants__AssetI__5441852A" Association="Self.FK__Variants__AssetI__5441852A">
+      <End Role="Assets" EntitySet="Assets" />
+      <End Role="Variants" EntitySet="Variants" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Variants__FileOb__534D60F1" Association="Self.FK__Variants__FileOb__534D60F1">
+      <End Role="FolderStructure" EntitySet="FolderStructure" />
+      <End Role="Variants" EntitySet="Variants" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

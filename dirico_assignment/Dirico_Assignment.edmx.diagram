@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ba6d85d3bae94b11a025a927847b45d2" Name="Diagram1">
+        <EntityTypeShape EntityType="Dirico_DatabaseModel.Asset" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dirico_DatabaseModel.AssetType" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dirico_DatabaseModel.FolderStructure" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dirico_DatabaseModel.Variant" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="Dirico_DatabaseModel.FK__Assets__AssetTyp__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="Dirico_DatabaseModel.FK__Assets__FileObje__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="Dirico_DatabaseModel.FK__Variants__AssetI__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="Dirico_DatabaseModel.FK__FolderStr__Paren__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="Dirico_DatabaseModel.FK__Variants__FileOb__534D60F1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

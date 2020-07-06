@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Dirico_DatabaseModelStoreContainer" CdmEntityContainer="Dirico_DatabaseEntities">
+    <EntitySetMapping Name="Assets">
+      <EntityTypeMapping TypeName="Dirico_DatabaseModel.Asset">
+        <MappingFragment StoreEntitySet="Assets">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="BlobName" ColumnName="BlobName" />
+          <ScalarProperty Name="BlobPath" ColumnName="BlobPath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetTypes">
+      <EntityTypeMapping TypeName="Dirico_DatabaseModel.AssetType">
+        <MappingFragment StoreEntitySet="AssetTypes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FolderStructures">
+      <EntityTypeMapping TypeName="Dirico_DatabaseModel.FolderStructure">
+        <MappingFragment StoreEntitySet="FolderStructure">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsDirectory" ColumnName="IsDirectory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Variants">
+      <EntityTypeMapping TypeName="Dirico_DatabaseModel.Variant">
+        <MappingFragment StoreEntitySet="Variants">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AssetMetaData" ColumnName="AssetMetaData" />
+          <ScalarProperty Name="Properties" ColumnName="Properties" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK__Assets__AssetTyp__4F7CD00D" TypeName="Dirico_DatabaseModel.FK__Assets__AssetTyp__4F7CD00D" StoreEntitySet="Assets">
+      <EndProperty Name="AssetTypes">
+        <ScalarProperty Name="ID" ColumnName="AssetTypeId" />
+      </EndProperty>
+      <EndProperty Name="Assets">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__Assets__FileObje__5070F446" TypeName="Dirico_DatabaseModel.FK__Assets__FileObje__5070F446" StoreEntitySet="Assets">
+      <EndProperty Name="FolderStructure">
+        <ScalarProperty Name="ID" ColumnName="FileObjectId" />
+      </EndProperty>
+      <EndProperty Name="Assets">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__Variants__AssetI__5441852A" TypeName="Dirico_DatabaseModel.FK__Variants__AssetI__5441852A" StoreEntitySet="Variants">
+      <EndProperty Name="Assets">
+        <ScalarProperty Name="ID" ColumnName="AssetID" />
+      </EndProperty>
+      <EndProperty Name="Variants">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="AssetID" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__FolderStr__Paren__4AB81AF0" TypeName="Dirico_DatabaseModel.FK__FolderStr__Paren__4AB81AF0" StoreEntitySet="FolderStructure">
+      <EndProperty Name="FolderStructure">
+        <ScalarProperty Name="ID" ColumnName="ParentID" />
+      </EndProperty>
+      <EndProperty Name="FolderStructure1">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="ParentID" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK__Variants__FileOb__534D60F1" TypeName="Dirico_DatabaseModel.FK__Variants__FileOb__534D60F1" StoreEntitySet="Variants">
+      <EndProperty Name="FolderStructure">
+        <ScalarProperty Name="ID" ColumnName="FileObjectId" />
+      </EndProperty>
+      <EndProperty Name="Variants">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

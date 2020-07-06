@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Dirico_DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Assets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AssetTypeId" Type="int" Nullable="false" />
+          <Property Name="FileObjectId" Type="int" Nullable="false" />
+          <Property Name="BlobName" Type="nvarchar" MaxLength="100" />
+          <Property Name="BlobPath" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="AssetTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FolderStructure">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="IsDirectory" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Variants">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileObjectId" Type="int" Nullable="false" />
+          <Property Name="AssetID" Type="int" />
+          <Property Name="AssetMetaData" Type="nvarchar" MaxLength="200" />
+          <Property Name="Properties" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Assets__AssetTyp__4F7CD00D">
+          <End Role="AssetTypes" Type="Self.AssetTypes" Multiplicity="1" />
+          <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssetTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Assets">
+              <PropertyRef Name="AssetTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Assets__FileObje__5070F446">
+          <End Role="FolderStructure" Type="Self.FolderStructure" Multiplicity="1" />
+          <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FolderStructure">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Assets">
+              <PropertyRef Name="FileObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FolderStr__Paren__4AB81AF0">
+          <End Role="FolderStructure" Type="Self.FolderStructure" Multiplicity="0..1" />
+          <End Role="FolderStructure1" Type="Self.FolderStructure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FolderStructure">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FolderStructure1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Variants__AssetI__5441852A">
+          <End Role="Assets" Type="Self.Assets" Multiplicity="0..1" />
+          <End Role="Variants" Type="Self.Variants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assets">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Variants">
+              <PropertyRef Name="AssetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Variants__FileOb__534D60F1">
+          <End Role="FolderStructure" Type="Self.FolderStructure" Multiplicity="1" />
+          <End Role="Variants" Type="Self.Variants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FolderStructure">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Variants">
+              <PropertyRef Name="FileObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Dirico_DatabaseModelStoreContainer">
+          <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssetTypes" EntityType="Self.AssetTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FolderStructure" EntityType="Self.FolderStructure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Variants" EntityType="Self.Variants" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Assets__AssetTyp__4F7CD00D" Association="Self.FK__Assets__AssetTyp__4F7CD00D">
+            <End Role="AssetTypes" EntitySet="AssetTypes" />
+            <End Role="Assets" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Assets__FileObje__5070F446" Association="Self.FK__Assets__FileObje__5070F446">
+            <End Role="FolderStructure" EntitySet="FolderStructure" />
+            <End Role="Assets" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FolderStr__Paren__4AB81AF0" Association="Self.FK__FolderStr__Paren__4AB81AF0">
+            <End Role="FolderStructure" EntitySet="FolderStructure" />
+            <End Role="FolderStructure1" EntitySet="FolderStructure" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Variants__AssetI__5441852A" Association="Self.FK__Variants__AssetI__5441852A">
+            <End Role="Assets" EntitySet="Assets" />
+            <End Role="Variants" EntitySet="Variants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Variants__FileOb__534D60F1" Association="Self.FK__Variants__FileOb__534D60F1">
+            <End Role="FolderStructure" EntitySet="FolderStructure" />
+            <End Role="Variants" EntitySet="Variants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Dirico_DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AssetTypeId" Type="Int32" Nullable="false" />
+          <Property Name="FileObjectId" Type="Int32" Nullable="false" />
+          <Property Name="BlobName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BlobPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AssetType" Relationship="Self.FK__Assets__AssetTyp__4F7CD00D" FromRole="Assets" ToRole="AssetTypes" />
+          <NavigationProperty Name="FolderStructure" Relationship="Self.FK__Assets__FileObje__5070F446" FromRole="Assets" ToRole="FolderStructure" />
+          <NavigationProperty Name="Variants" Relationship="Self.FK__Variants__AssetI__5441852A" FromRole="Assets" ToRole="Variants" />
+        </EntityType>
+        <EntityType Name="AssetType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Assets" Relationship="Self.FK__Assets__AssetTyp__4F7CD00D" FromRole="AssetTypes" ToRole="Assets" />
+        </EntityType>
+        <EntityType Name="FolderStructure">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="IsDirectory" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Assets" Relationship="Self.FK__Assets__FileObje__5070F446" FromRole="FolderStructure" ToRole="Assets" />
+          <NavigationProperty Name="FolderStructure1" Relationship="Self.FK__FolderStr__Paren__4AB81AF0" FromRole="FolderStructure" ToRole="FolderStructure1" />
+          <NavigationProperty Name="FolderStructure2" Relationship="Self.FK__FolderStr__Paren__4AB81AF0" FromRole="FolderStructure1" ToRole="FolderStructure" />
+          <NavigationProperty Name="Variants" Relationship="Self.FK__Variants__FileOb__534D60F1" FromRole="FolderStructure" ToRole="Variants" />
+        </EntityType>
+        <EntityType Name="Variant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileObjectId" Type="Int32" Nullable="false" />
+          <Property Name="AssetID" Type="Int32" />
+          <Property Name="AssetMetaData" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Properties" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Asset" Relationship="Self.FK__Variants__AssetI__5441852A" FromRole="Variants" ToRole="Assets" />
+          <NavigationProperty Name="FolderStructure" Relationship="Self.FK__Variants__FileOb__534D60F1" FromRole="Variants" ToRole="FolderStructure" />
+        </EntityType>
+        <Association Name="FK__Assets__AssetTyp__4F7CD00D">
+          <End Role="AssetTypes" Type="Self.AssetType" Multiplicity="1" />
+          <End Role="Assets" Type="Self.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssetTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Assets">
+              <PropertyRef Name="AssetTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Assets__FileObje__5070F446">
+          <End Role="FolderStructure" Type="Self.FolderStructure" Multiplicity="1" />
+          <End Role="Assets" Type="Self.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FolderStructure">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Assets">
+              <PropertyRef Name="FileObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Variants__AssetI__5441852A">
+          <End Role="Assets" Type="Self.Asset" Multiplicity="0..1" />
+          <End Role="Variants" Type="Self.Variant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assets">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Variants">
+              <PropertyRef Name="AssetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FolderStr__Paren__4AB81AF0">
+          <End Role="FolderStructure" Type="Self.FolderStructure" Multiplicity="0..1" />
+          <End Role="FolderStructure1" Type="Self.FolderStructure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FolderStructure">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FolderStructure1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Variants__FileOb__534D60F1">
+          <End Role="FolderStructure" Type="Self.FolderStructure" Multiplicity="1" />
+          <End Role="Variants" Type="Self.Variant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FolderStructure">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Variants">
+              <PropertyRef Name="FileObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Dirico_DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Assets" EntityType="Self.Asset" />
+          <EntitySet Name="AssetTypes" EntityType="Self.AssetType" />
+          <EntitySet Name="FolderStructures" EntityType="Self.FolderStructure" />
+          <EntitySet Name="Variants" EntityType="Self.Variant" />
+          <AssociationSet Name="FK__Assets__AssetTyp__4F7CD00D" Association="Self.FK__Assets__AssetTyp__4F7CD00D">
+            <End Role="AssetTypes" EntitySet="AssetTypes" />
+            <End Role="Assets" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Assets__FileObje__5070F446" Association="Self.FK__Assets__FileObje__5070F446">
+            <End Role="FolderStructure" EntitySet="FolderStructures" />
+            <End Role="Assets" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Variants__AssetI__5441852A" Association="Self.FK__Variants__AssetI__5441852A">
+            <End Role="Assets" EntitySet="Assets" />
+            <End Role="Variants" EntitySet="Variants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FolderStr__Paren__4AB81AF0" Association="Self.FK__FolderStr__Paren__4AB81AF0">
+            <End Role="FolderStructure" EntitySet="FolderStructures" />
+            <End Role="FolderStructure1" EntitySet="FolderStructures" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Variants__FileOb__534D60F1" Association="Self.FK__Variants__FileOb__534D60F1">
+            <End Role="FolderStructure" EntitySet="FolderStructures" />
+            <End Role="Variants" EntitySet="Variants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Dirico_DatabaseModelStoreContainer" CdmEntityContainer="Dirico_DatabaseEntities">
+          <EntitySetMapping Name="Assets">
+            <EntityTypeMapping TypeName="Dirico_DatabaseModel.Asset">
+              <MappingFragment StoreEntitySet="Assets">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="AssetTypeId" ColumnName="AssetTypeId" />
+                <ScalarProperty Name="FileObjectId" ColumnName="FileObjectId" />
+                <ScalarProperty Name="BlobName" ColumnName="BlobName" />
+                <ScalarProperty Name="BlobPath" ColumnName="BlobPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssetTypes">
+            <EntityTypeMapping TypeName="Dirico_DatabaseModel.AssetType">
+              <MappingFragment StoreEntitySet="AssetTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FolderStructures">
+            <EntityTypeMapping TypeName="Dirico_DatabaseModel.FolderStructure">
+              <MappingFragment StoreEntitySet="FolderStructure">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="IsDirectory" ColumnName="IsDirectory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Variants">
+            <EntityTypeMapping TypeName="Dirico_DatabaseModel.Variant">
+              <MappingFragment StoreEntitySet="Variants">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FileObjectId" ColumnName="FileObjectId" />
+                <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+                <ScalarProperty Name="AssetMetaData" ColumnName="AssetMetaData" />
+                <ScalarProperty Name="Properties" ColumnName="Properties" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
