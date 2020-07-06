@@ -40,6 +40,7 @@ namespace dirico_assignment.Models.AssetManagementModel
         public string blobName { get; set; }
         public string title { get; set; }
         public string content { get; set; }
+        public long? size { get; set; }
         public List<FolderStructureModel> items { get; set; }
     }
 

@@ -4,6 +4,9 @@
     <EntitySetMapping Name="Assets">
       <EntityTypeMapping TypeName="Dirico_DatabaseModel.Asset">
         <MappingFragment StoreEntitySet="Assets">
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="AssetTypeId" ColumnName="AssetTypeId" />

@@ -4,7 +4,7 @@ import { Popup } from 'devextreme-react/popup';
 import { Button, TextBox, Box } from 'devextreme-react';
 import AddAsset from './AddAsset';
 const allowedFileExtensions = []; //['.js', '.json', '.css'];
-
+ 
 // import { addAsset, addVariant, editContact, getFolderStructure } from "./FetchAPIs";
 
 class FolderStructure extends React.Component {
@@ -68,7 +68,7 @@ class FolderStructure extends React.Component {
             <React.Fragment>
                 <FileManager
                     ref={this.fileManagerRef}
-                    fileSystemProvider={this.state.fileItems}
+                    fileSystemProvider={fileItems} //{this.state.fileItems}
                     onContextMenuItemClick={this.onItemClick}
                     height={450}>
                     <Permissions

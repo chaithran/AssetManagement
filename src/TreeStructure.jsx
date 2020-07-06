@@ -31,7 +31,7 @@ class TreeStructure extends React.Component {
       <React.Fragment>
         <div className="form">
           <TreeView id="treeview"
-            items={this.state.overviewTree}
+            items={fileItems}//{this.state.overviewTree}
             // dataStructure="plain"
             displayExpr="name"
             parentIdExpr="parentID"
@@ -106,6 +106,24 @@ class TreeStructure extends React.Component {
 
 }
 var thisIsMyCopy = renderHTML('<p>copy copy copy <strong>strong copy</strong></p>');
+
+const fileItems = [
+  {
+      "id": 1,
+      "name": "Clients",
+      "parentId": null,
+      "isDirectory": true,
+      "items": [
+          {
+              "id": 2,
+              "name": "Variants",
+              "parentId": 1,
+              "isDirectory": true,
+
+          }
+      ]
+  }
+];
 
 
 export default TreeStructure;

@@ -31,7 +31,7 @@ namespace dirico_assignment.Controllers
                         blobName=As.BlobName,
                         title=As.Title,
                         content=As.Content,
-                        size=Size
+                        size=As.Size
                     }
                 ).ToList();
                 foreach (var i in result)
