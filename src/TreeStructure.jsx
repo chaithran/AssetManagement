@@ -30,7 +30,7 @@ class TreeStructure extends React.Component {
       <React.Fragment>
         <div className="form">
           <TreeView id="treeview"
-            items={fileItems}//{this.state.overviewTree}
+            items={this.state.overviewTree}
             // dataStructure="plain"
             displayExpr="name"
             parentIdExpr="parentID"
@@ -48,11 +48,9 @@ class TreeStructure extends React.Component {
               <Box>       
                 
                  {/* <img src={currentItem.image} /> */}
-                <div className="name">{currentItem.title}</div>
-                <div className="price">{currentItem.content}</div>
+                {/* <div className="name">{currentItem.title}</div>
+                <div className="price">{currentItem.content}</div> */}
                 <div id="container"></div> 
-                <input id="newVariant" />
-                <Button>Add Variant</Button>
               </Box>
             </div>
           }
@@ -66,8 +64,9 @@ class TreeStructure extends React.Component {
     this.setState({
       currentItem: Object.assign({}, e.itemData)
     });
+    var isVideo=e.itemData.name.includes('mp4')?true:false;
     if(!e.itemData.isDirectory && e.itemData.blobName.length>0)
-       this.getImageFromContainer(e.itemData.blobName,e.itemData.title,e.itemData.content);
+       this.getImageFromContainer(e.itemData.blobName,e.itemData.title,e.itemData.content,isVideo);
   }
 
   get treeView() {
@@ -91,16 +90,26 @@ class TreeStructure extends React.Component {
       });
   }
 
-  getImageFromContainer(blobName,title,content) {
+  getImageFromContainer(blobName,title,content,isVideo) {
     // var blobName = "85b1e523-43c5-4788-be2f-c4da8427b6b6"
     return fetch(`${"http://localhost:53615/api/fileupload/getblob?blobName=" + blobName}`)
         .then(response => response.json())
         .then(result => {
             console.log(result)
             const data = result;
-            const Example = ({ data }) => <div><h3>Title : {title}</h3> <img src={`data:image/jpeg;base64,${data}`} />
-            <h4>Content : {content}</h4></div>
-            ReactDOM.render(<Example data={data} />, document.getElementById('container'))
+            if(isVideo){
+              const Example = ({ data }) => <div><h3>Title : {title}</h3> 
+              <video src={`data:video/mp4;base64,${data}`} controls autostart autoplay />
+              {/* <vide src={`data:image/jpeg;base64,${data}`} /> */}
+              <h4>Content : {content}</h4></div>
+              ReactDOM.render(<Example data={data} />, document.getElementById('container'))
+            }
+            else{
+              const Example = ({ data }) => <div><h3>Title : {title}</h3> <img src={`data:image/jpeg;base64,${data}`} />
+              <h4>Content : {content}</h4></div>
+              ReactDOM.render(<Example data={data} />, document.getElementById('container'))
+            }
+            
         });
 
 }

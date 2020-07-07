@@ -68,7 +68,7 @@ class FolderStructure extends React.Component {
             <React.Fragment>
                 <FileManager
                     ref={this.fileManagerRef}
-                    fileSystemProvider={this.state.fileItems}
+                    fileSystemProvider= {this.state.fileItems}
                     onContextMenuItemClick={this.onItemClick}
                     height={450}>
                     <Permissions
@@ -190,7 +190,7 @@ class FolderStructure extends React.Component {
             size: 0
         };
         this.addVariantAPI(newItem);
-        // this.GetFolderStructure();
+        this.GetFolderStructure();
 
     }
 
@@ -295,7 +295,7 @@ class FolderStructure extends React.Component {
         axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
-        axios.post(`http://localhost:53615/add_variant`, variant,
+        axios.post(`http://localhost:53615/api/assetmanagement/add_variant`, variant,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -323,7 +323,7 @@ class FolderStructure extends React.Component {
         axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
-        axios.post(`http://localhost:53615/add_asset`, data,
+        axios.post(`http://localhost:53615/api/assetmanagement/add_asset`, data,
             {
                 headers: {
                     'Content-Type': 'application/json',

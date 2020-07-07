@@ -122,7 +122,7 @@ namespace dirico_assignment.Controllers
             return Ok();
         }        
 
-        [System.Web.Http.AcceptVerbs("POST")]
+        
         [HttpPost]
         [Route("add_variant")]
         //[EnableCors(origins: "*", headers: "*", methods: "*")]
