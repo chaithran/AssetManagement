@@ -26,7 +26,8 @@ class App extends Component {
         <Box background="url('./img/main.jpg')"
          pad="small" height="100vh" position="fixed" overflow="auto" align="center" flex="grow" animation={{ "type": "slideUp", "size": "small" }} background="#223E4F">
            <Tabs justify="left" flex="shrink">
-            <Tab title="Folder stucture" hoverIndicator={true} icon={<DocumentImage />} plain={false} reverse={false} >
+            <Tab title="Folder stucture" hoverIndicator={true} icon={<DocumentImage />} plain={false} reverse={false} style={{ width:"9vw", border: "2px solid #223E4F", "border-radius": "10px" }}
+             >
             <FolderStructure />
             </Tab>            
             <Tab title="Overview" icon={<Overview /> } style={{ width:"9vw", border: "2px solid #223E4F", "border-radius": "10px" }}>

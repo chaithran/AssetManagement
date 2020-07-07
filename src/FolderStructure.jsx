@@ -74,10 +74,10 @@ class FolderStructure extends React.Component {
                     // height={450}
                     >
                     <Permissions
-                        create={true}
-                        delete={true}
-                        rename={true}
-                        download={true}>
+                        create={true}>
+                        // delete={true}
+                        // rename={true}
+                        // download={true}
                     </Permissions>
                     <ItemView showParentFolder={false}
                     >
