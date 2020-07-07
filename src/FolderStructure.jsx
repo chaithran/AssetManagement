@@ -68,7 +68,7 @@ class FolderStructure extends React.Component {
             <React.Fragment>
                 <FileManager
                     ref={this.fileManagerRef}
-                    fileSystemProvider={fileItems} //{this.state.fileItems}
+                    fileSystemProvider={this.state.fileItems}
                     onContextMenuItemClick={this.onItemClick}
                     height={450}>
                     <Permissions
@@ -169,6 +169,7 @@ class FolderStructure extends React.Component {
     }
     //Reload tree structure
     get fileManager() {
+        if(this.fileManagerRef.current!=null)
         return this.fileManagerRef.current.instance;
     }
 
@@ -189,7 +190,7 @@ class FolderStructure extends React.Component {
             size: 0
         };
         this.addVariantAPI(newItem);
-        this.GetFolderStructure();
+        // this.GetFolderStructure();
 
     }
 

@@ -19,22 +19,30 @@ class AddAsset extends Component {
         })
     };
 
-    handleImageChange = (event) => {       
-        var files=event.target.files[0];
-        var test = Resizer.imageFileResizer(
-            files, //file
-            300,//maxWidth
-            300,//maxHeight
-            'JPEG', //compressFormat
-            100,//quality
-            0,//rotation
-            uri => {//responseUriFunc
-                this.setState({
-                    image: uri
-                })
-            },
-            'blob'//outputType  blob or base 64
-        );
+    handleImageChange = (event) => {
+        var files = event.target.files[0];
+        if (!files.type.includes('video')) {
+            var test = Resizer.imageFileResizer(
+                files, //file
+                300,//maxWidth
+                300,//maxHeight
+                'JPEG', //compressFormat
+                100,//quality
+                0,//rotation
+                uri => {//responseUriFunc
+                    this.setState({
+                        image: uri
+                    })
+                },
+                'blob'//outputType  blob or base 64
+            );
+        }
+        else
+        {
+            this.setState({
+                image:files
+            })
+        }
         const imageFile = event.target.files[0];
         this.setState({
             name: files.name
@@ -57,13 +65,13 @@ class AddAsset extends Component {
             .then(resp => {
                 if (resp.status == 200)
                     // return resp.data;
-                //Step 2: Create New Asset and Variant in backend
+                    //Step 2: Create New Asset and Variant in backend
                     blobName = resp.data
                 var fileName = this.state.name;
                 var title = this.state.title;
                 var content = this.state.content;
                 var size = this.state.image.size;
-                this.props.uploadAsset(fileName, title, content, blobName,size); //blobObj
+                this.props.uploadAsset(fileName, title, content, blobName, size); //blobObj
             })
             .catch(error => {
                 if (error) {
@@ -87,7 +95,7 @@ class AddAsset extends Component {
                     <p>
                         <input type="file"
                             id="image"
-                            accept="image/png, image/jpeg" onChange={this.handleImageChange} required />
+                            accept="image/png, image/jpeg, video/mp4" onChange={this.handleImageChange} required />
                     </p>
                     <input type="submit" />
                 </form>

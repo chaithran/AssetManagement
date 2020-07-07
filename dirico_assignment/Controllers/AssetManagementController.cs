@@ -22,21 +22,37 @@ namespace dirico_assignment.Controllers
             IList<FolderStructureModel> folderstructure = null;
             using (var entities = new Dirico_DatabaseEntities())
             {
-                var result = entities.FolderStructures.
-                    Join(entities.Assets,fs=>fs.ID,As=>As.FileObjectId,(fs,As) => new FolderStructureModel {
-                        id = fs.ID,
-                        name = fs.Name,
-                        isDirectory = fs.IsDirectory,
-                        parentID = fs.ParentID,
-                        blobName=As.BlobName,
-                        title=As.Title,
-                        content=As.Content,
-                        size=As.Size
-                    }
+                var result = entities.FolderStructures.Select(fs => new FolderStructureModel
+                {
+                    id = fs.ID,
+                    name = fs.Name,
+                    isDirectory = fs.IsDirectory,
+                    parentID = fs.ParentID,
+                    blobName = entities.Assets.Where(x => x.FileObjectId == fs.ID).Select(x => x.BlobName).FirstOrDefault(),
+                    title = entities.Assets.Where(x => x.FileObjectId == fs.ID).Select(x => x.Title).FirstOrDefault(),
+                    content = entities.Assets.Where(x => x.FileObjectId == fs.ID).Select(x => x.Content).FirstOrDefault(),
+                    size = entities.Assets.Where(x => x.FileObjectId == fs.ID).Select(x => x.Size).FirstOrDefault()
+                }
                 ).ToList();
                 foreach (var i in result)
                     i.items = result.Where(n => n.parentID == i.id).ToList();
-                folderstructure = result.Where(n => n.parentID.HasValue==false).ToList();
+
+                folderstructure = result.Where(x => x.parentID.HasValue == false).
+                    //Join(entities.Assets, fs => fs.id, As => As.FileObjectId, (fs, As) => new { fs, As }).
+                    //Select(final => new
+                    //FolderStructureModel
+                    //{
+                    //    id = final.fs.id,
+                    //    name = final.fs.name,
+                    //    isDirectory = final.fs.isDirectory,
+                    //    parentID = final.fs.parentID,
+                    //    blobName = final.As.BlobName,
+                    //    title = final.As.Title,
+                    //    content = final.As.Content,
+                    //    size = final.As.Size
+                    //}).
+
+                    ToList();
             }
             if (folderstructure.Count == 0)
             {
