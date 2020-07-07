@@ -70,15 +70,18 @@ class FolderStructure extends React.Component {
                     ref={this.fileManagerRef}
                     fileSystemProvider= {this.state.fileItems}
                     onContextMenuItemClick={this.onItemClick}
-                    height={450}>
+                    style={{"background":"orange", "border-radius": "5px"}}
+                    // height={450}
+                    >
                     <Permissions
                         create={true}
                         delete={true}
                         rename={true}
                         download={true}>
                     </Permissions>
-                    <ItemView showParentFolder={false}>
-                        <Details>
+                    <ItemView showParentFolder={false}
+                    >
+                        <Details >
                             <Column dataField="thumbnail"></Column>
                             <Column dataField="name"></Column>
                         </Details>
@@ -92,23 +95,25 @@ class FolderStructure extends React.Component {
                         <Item name="separator" location="after" />
                         <Item name="switchView" />
                     </Toolbar>
-                    <ContextMenu>
+                    <ContextMenu background="darkcyan">
                         <Item name="refresh" />
                     </ContextMenu>
                 </FileManager>
 
                 <div id="assetContainer">
                     <Popup
+                        style={{ background:"darkcyan" }}
                         visible={this.state.popupAssetVisible}
                         onHiding={this.hideAssetInfo}
                         dragEnabled={true}
-                        // closeOnOutsideClick={true}
+                        closeOnOutsideClick={true}
                         showTitle={true}
                         title="Asset"
-                        width={300}
+                        width={450}
                         height="auto"
                     >
-                        <div><AddAsset uploadAsset={this.uploadAsset.bind()} /></div>
+                        <div>
+                            <AddAsset uploadAsset={this.uploadAsset.bind()} /></div>
                     </Popup>
                 </div>
                 <div id="variantContainer">

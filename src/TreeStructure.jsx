@@ -3,6 +3,8 @@ import renderHTML from 'react-render-html';
 import { TreeView, ContextMenu, List } from 'devextreme-react';
 import { Box, Button } from 'grommet';
 import ReactDOM from 'react-dom';
+import image_tmp from './img/b7.jpg';
+
 
 class TreeStructure extends React.Component {
   constructor(props) {
@@ -28,6 +30,13 @@ class TreeStructure extends React.Component {
     const { currentItem } = this.state;
     return (
       <React.Fragment>
+        <Box
+            background="orange"
+            width="98vw"
+            height="85vh"
+            pad="medium"
+            round="small"
+            >
         <div className="form">
           <TreeView id="treeview"
             items={this.state.overviewTree}
@@ -35,7 +44,6 @@ class TreeStructure extends React.Component {
             displayExpr="name"
             parentIdExpr="parentID"
             keyExpr="id"
-            width={300}
             searchMode={this.state.value}
             searchEnabled={true}
             ref={this.treeViewRef}
@@ -45,16 +53,13 @@ class TreeStructure extends React.Component {
           {
             !currentItem.isDirectory &&
             <div id="product-details">
-              <Box>       
-                
-                 {/* <img src={currentItem.image} /> */}
-                {/* <div className="name">{currentItem.title}</div>
-                <div className="price">{currentItem.content}</div> */}
-                <div id="container"></div> 
+              <Box>
+                <div id="container"> <img src={image_tmp}/></div> 
               </Box>
             </div>
           }
         </div>
+        </Box>
       </React.Fragment>
     );
   }
@@ -136,6 +141,5 @@ const fileItems = [
       ]
   }
 ];
-
 
 export default TreeStructure;
